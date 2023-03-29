@@ -21,5 +21,5 @@ requests==2.28.2
 3. Устанавливаем библиотеки из файла [requirements.txt](https://github.com/IPRepin/devman_bot/blob/master/requirements.txt)
 4. В корневой паке проекта содаем файл с именем  `.env`
 5. Помещаем в него:
-    * Токен API Devman `TOKEN='Ваш_токен_Devman'`
-    * Токен Telegram `TEL_TOKEN='Ваш_телеграмм_токен'`
+    * Токен API Devman `DEVMAN_API_TOKEN='Ваш_токен_Devman'`
+    * Токен Telegram `TELEGRAM_TOKEN='Ваш_телеграмм_токен'`
