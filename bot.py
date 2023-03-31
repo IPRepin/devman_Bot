@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 async def command_start(message: types.Message):
     your_name = message.from_user.username
     try:
-        await bot.send_message(message.from_user.id,
+        await bot.send_message(os.getenv('TG_CHAT_ID'), message.from_user.id,
                                f'Привет! {your_name}', )
         await message.delete()
     except:
