@@ -33,10 +33,10 @@ async def get_the_result(message: types.Message):
             headers = {'Authorization': f'Token {os.getenv("DEVMAN_API_TOKEN")}'}
             response = requests.get(url, params=params, headers=headers)
             response.raise_for_status()
-            json_content = response.json()
-            if json_content['status'] == 'found':
+            content = response.json()
+            if content['status'] == 'found':
                 await message.reply('Преподаватель проверил работу!')
-            for attempt in json_content['new_attempts']:
+            for attempt in content['new_attempts']:
                 await message.answer(f'{attempt["lesson_title"]} {attempt["lesson_url"]}')
                 if attempt['is_negative']:
                     await message.answer('К сожалению в задании ошибки!')
@@ -46,10 +46,6 @@ async def get_the_result(message: types.Message):
                         'Можно приступать к следующему уроку!'
                     )
                 time_st = attempt['timestamp']
-        except KeyError as ke:
-            logger.error('Key Error!')
-            await message.reply(f"Error {ke}")
-            logger.info('Reconnect...')
         except requests.exceptions.ReadTimeout as error:
             logger.error('TimeOut Error!')
             await message.reply(f"Error {error}")
@@ -63,5 +59,3 @@ async def get_the_result(message: types.Message):
 
 if __name__ == '__main__':
     executor.start_polling(dp)
-
-
